@@ -4,6 +4,14 @@
 - <b> Arquitetura: </b> MVC (Model-View-Controller)
 - <b> Ferramenta de Diagramação: </b> draw.io
 
+<div align="center">
+<sub>Figura 1 - Arquitetura MVC</sub> <br>
+  
+<img width="720" alt="Imagem da arquitetura feita no draw.io" src="/assets/arquitetura-mvc.png">
+
+<sup>Material produzido pelos autores (2024)</sup>
+</div>
+
 ## Modelos (Models):
 
 &nbsp;&nbsp;&nbsp;&nbsp; Os modelos desse projeto apresentam 3 tabelas independentes: <code> engineer </code>, <code> worker </code> e <code> manual </code>. Uma tabela dependente <code> file </code> e uma tabela por associação <code> delegation </code>. Respectivamente, seus atributos são:
@@ -17,7 +25,7 @@
 <div align="center">
 <sub>Figura 2 - Modelo conceitual</sub> <br>
   
-<img width="720" alt="modelo-conceitural-bd" src="../assets/modelo-conceitual.png">
+<img width="720" alt="modelo-conceitural-bd" src="/assets/modelo-conceitual.png">
 
 <sup>Material produzido pelos autores (2024)</sup>
 </div>
