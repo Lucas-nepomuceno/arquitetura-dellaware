@@ -1,6 +1,6 @@
 # MVC - LedTech/Dell
 - <b> Nome do Projeto: </b> DellAware
-- <b> Descrição: </b> Trata-se de uma aplicação web que será desenvolvida para a empresa Dell Technologies voltada a resolver o problema das pausas na linha de produção. Para tanto, disponibilizar-se-á, por meio da ação dos administradores, os manuais necessários para a linha de produção individualmente a cada montador da fábrica. Além disso, os montadores terão a chance de checar os manuais que já leram e os administradores verão o desempenho dos montadores em relação a leitura dos manuais.
+- <b> Descrição: </b> Trata-se de uma aplicação web que será desenvolvida para a empresa Dell Technologies voltada a resolver o problema das pausas na linha de produção. Para tanto, disponibilizar-se-á, por meio da ação dos engenheiros, os manuais necessários para a linha de produção individualmente a cada montador da fábrica. Além disso, os montadores terão a chance de checar os manuais que já leram e os engenheiros verão o desempenho dos montadores em relação a leitura dos manuais.
 - <b> Arquitetura: </b> MVC (Model-View-Controller)
 - <b> Ferramenta de Diagramação: </b> draw.io
 
@@ -32,133 +32,170 @@
 
 ## Controladores (Controllers):
 
-&nbsp;&nbsp;&nbsp;&nbsp; Nesta aplicação, os usuários serão divididos em <i> engineer </i>, <i> worker </i>, e <i> administrators </i>. Os administradores têm acesso aos seguintes controladores:
-- create: adiciona um funcionário à lista de <code> worker </code> ou <code>engineer</code>:
-  - Parâmetros de entrada: registrations, names, emails, birthdays, (lines), actives
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para adicionar um registro à tabela <code> worker </code>
-  - View: cria um <i> worker's interface </i> para o novo montador
+&nbsp;&nbsp;&nbsp;&nbsp; Para essa aplicação, criou-se seis controllers que possuem os seguintes métodos.
 
-- getById: possibilita a visualização dos dados de um funcionário
-  - Parâmetros de entrada: id (<code> worker </code> ou <code>engineer</code>)
-  - Parâmetros de saída:  names, emails, birthdays, (lines), actives
-  - Ações: Pedir ao model para consultar os dados de um funcionário sob o id da tabela <code> worker </code> ou <code>engineer</code>
-  - View: Abre uma aba com os dados do funcionário
+### Auth
 
-- getAll: possibilita a visualização dos dados de todos os funcionários de <code>worker</code> ou <code>engineer</code>
-  - Parâmetros de entrada: N/A
-  - Parâmetros de saída:  names, emails, birthdays, (lines), actives
-  - Ações: Pedir ao model para consultar todos os dados de <code>worker</code> ou <code>engineer</code>
-  - View: Atualiza a team
-
-- update: atualiza um funcionário na lista de <code> worker </code> ou <code>engineer</code>
-  - Parâmetros de entrada: id, registrations, names, emails, birthdays, (lines), actives
-  - Ações: Pedir ao model para alterar um registro da tabela <code> worker </code> ou <code>engineer</code>
-  - View: atualiza a team
-
-- delete: exclui um funcionário da lista <code> worker </code> ou <code>engineer</code>
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para deletar um registro da tabela <code> worker </code> ou <code>engineer</code>
-  - View: exclui o<i> worker's interface </i> ou <i>engineer's dashboard</i> do montador ou engenheiro excluído, respectivamente
-
-&nbsp;&nbsp;&nbsp;&nbsp; Já os engenheiros têm acesso aos seguintes controllers:
-
-- create_manual: adiciona um manual à lista de manuais
-  - Parâmetros de entrada: names, categories, sub_categories1, sub_categories2, sub_categories3, sub_categories4, sub_categories5, actives
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para adicionar um registro a tabela <code> manual </code>
-  - View: altera o repositório de manuais, adicionando um manual
-
-- update_manual: atualiza um manual já criado
-  - Parâmetros de entrada: id (<code> manual </code>), date, update_descriptions, actives
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para alterar um registro da tabela <code> manual </code>
-  - View: altera o repositório de manuais, atualizando-o; adiciona uma descrição da atualização aos funcionários que tinham o manual na sua lista de leitura e altera o interface do funcionário atualizando a leitura
-
-- delete_manual: exclui um manual da tabela <code>manual</code>
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para deletar um registro da tabela <code> manual </code>
-  - View: exclui o manual do repositório
-
-- getAll_manual: possibilita a visualização dos dados de todos os manuais
-  - Parâmetros de entrada: N/A
-  - Parâmetros de saída: id (<code> manual </code>), date, update_descriptions, actives 
-  - Ações: Pedir ao model para consultar todos os dados de <code>manual</code>
-  - View: Atualiza o repositorio
-
-- getById_manual: possibilita a visualização dos dados de um manual 
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: id (<code> manual </code>), date, update_descriptions, actives 
-  - Ações: Pedir ao model para consultar todos os dados de <code>manual</code> sob o id requisitado
-  - View: Abre uma aba com os dados
-  
-- create_file: adiciona um arquivo à lista de <code> file </code>
-  - Parâmetros de entrada: id (<code> manual </code>), types, url
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para adicionar um registro a tabela <code> file </code>
-  - View: altera o repositório de manuais, adicionando um arquivo dentro do respectivo manual
-
-- delete_file: deleta um file já criado
-  - Parâmetros de entrada: id (<code> file </code>)
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para deletar um registro da tabela <code> file </code>
-  - View: altera o repositório de manuais, deletando um arquivo de dentro do respectivo manual
-
-- delete_file: exclui um file da tabela <code>file</code>
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para deletar um registro da tabela <code> file </code>
-  - View: exclui o file dos manuais
-
-- getById_file: possibilita a visualização dos dados de um manual 
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: id (<code> manual </code>), types, url 
-  - Ações: Pedir ao model para consultar todos os dados de <code>file</code> sob o id requisitado
-  - View: Abre uma aba com os dados
-
-- create_delegation: delega uma leitura a um montador
-  - Parâmetros de entrada: registrations (<code> engineer </code>), registrations (<code> worker </code>), id (<code> manual </code>)
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para adicionar um registro a tabela <code> delegation </code>
-  - View: altera o interface do montador, adicionando a leitura; altera a dashboard do administrador com novas informações
-
-- delete_delegation: deleta uma delegation já criada
-  - Parâmetros de entrada: id
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para deletar um registro da tabela <code> delegation </code>
-  - View: altera o dashboard dos engenheiros
-
-
-&nbsp;&nbsp;&nbsp;&nbsp; Já os montadores têm acesso aos seguintes controllers:
-- already_read: dá um "check" no manual
-  - Parâmetros de entrada: id (<code> delegation </code>)
-  - Parâmetros de saída: N/A
-  - Ações: Pedir ao model para atualizar o registro sob id (<code> delegation </code>), setando o atributo <i> done </i> como verdadeiro.
-  - View: altera a interface do montador, "riscando" a tarefa da lista; altera o dashboard do administrador com novas informações
-  
-- acess: possibilita a leitura do manual
-  - Parâmetros de entrada: id (<code> delegation </code>), id (<code> manual </code>)
-  - Parâmetros de saída: names, types, url (<code> file </code>)
-  - Ações: Pedir ao model para consultar os arquivos sob o registro id (<code> manual </code>)
-  - View: Abre uma aba com os arquivos do manual
-
-&nbsp;&nbsp;&nbsp;&nbsp; Além disso, engenheiros e montadores terão acesso ao seguinte controller:
-- Auth: permite logar na aplicação
+Login: permite logar na aplicação
   - Parâmetros de entrada: emails e passwords
   - Parâmetros de saída: N/A
   - Ações: Pedir ao model para consultar o registro e <i>emails </i> e checar a senha nas tabelas <code> worker </code> e <code> engineer </code>
   - View: atualiza a view, redirecionando o usuário a seu respectivo interface
 
+
+### Enginner
+
+- create: adiciona um engenheiro à tabela de <code>engineer</code>:
+  - Parâmetros de entrada: registrations, names, emails, birthdays, actives
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para adicionar um registro à tabela <code> engineer</code>
+  - View: permite acesso ao fluxo de engenheiro ao novo engenheiro
+
+- getById: possibilita a visualização dos dados de um engenheiro
+  - Parâmetros de entrada: id (<code>engineer</code>)
+  - Parâmetros de saída:  registrations, names, emails, birthdays, actives
+  - Ações: Pedir ao model para consultar os dados de um funcionário sob o id da tabela <code>engineer</code>
+  - View: N/A
+
+- getAll: possibilita a visualização dos dados de todos os funcionários de <code>engineer</code>
+  - Parâmetros de entrada: N/A
+  - Parâmetros de saída:  registrations, names, emails, birthdays, actives
+  - Ações: Pedir ao model para consultar todos os dados de <code>engineer</code>
+  - View: N/A
+
+- update: atualiza um funcionário na tabela de <code>engineer</code>
+  - Parâmetros de entrada: id, registrations, names, emails, birthdays, actives
+  - Ações: Pedir ao model para alterar um registro da tabela <code>engineer</code>
+  - View: N/A
+
+- delete: exclui um funcionário da tabela de <code>engineer</code>
+  - Parâmetros de entrada: id
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para deletar um registro da tabela <code>engineer</code>
+  - View: exclui a rota privada do engenheiro deletado
+
+### Worker
+
+- create: adiciona um montador à tabela de <code>worker</code>:
+  - Parâmetros de entrada: registrations, names, emails, birthdays, lines, actives
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para adicionar um registro à tabela <code>workers</code>
+  - View: permite acesso ao fluxo de montador ao novo montador/altera os funcionários da view de delegação e funcionários
+
+- getById: possibilita a visualização dos dados de um montador
+  - Parâmetros de entrada: id (<code>montador</code>)
+  - Parâmetros de saída:  registrations, names, emails, birthdays, lines, actives
+  - Ações: Pedir ao model para consultar os dados de um funcionário sob o id da tabela <code>workers</code>
+  - View: N/A
+
+- getAll: possibilita a visualização dos dados de todos os funcionários de <code>montador</code>
+  - Parâmetros de entrada: N/A
+  - Parâmetros de saída:  registrations, names, emails, birthdays, lines, actives
+  - Ações: Pedir ao model para consultar todos os dados de <code>workers</code>
+  - View: N/A
+
+- update: atualiza um funcionário na tabela de <code>montador</code>
+  - Parâmetros de entrada: id, registrations, names, emails, birthdays, actives
+  - Ações: Pedir ao model para alterar um registro da tabela <code>workers</code>
+  - View: altera os funcionários da view de delegação e funcionários
+
+- delete: exclui um funcionário da tabela de <code>montador</code>
+  - Parâmetros de entrada: id
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para deletar um registro da tabela <code>montador</code>
+  - View: exclui a rota privada do montador deletado/ altera os funcionários da view de delegação e funcionários
+
+
+### Manual
+
+- create: adiciona um manual à tabela de <code>manuals</code>:
+  - Parâmetros de entrada: names, categories, sub_categories1, sub_categories2, sub_categories3, sub_categories4, sub_categories5, update_descriptions, active
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para adicionar um registro à tabela <code>manual</code>
+  - View: Altera a view de select manual/repository
+
+- getById: possibilita a visualização dos dados de um montador
+  - Parâmetros de entrada: id (<code>montador</code>)
+  - Parâmetros de saída:  registrations, names, emails, birthdays, lines, actives
+  - Ações: Pedir ao model para consultar os dados de um funcionário sob o id da tabela <code>montador</code>
+  - View: N/A
+
+- getAll: possibilita a visualização dos dados de todos os manuais de <code>manuals </code>
+  - Parâmetros de entrada: N/A
+  - Parâmetros de saída:  names, categories, sub_categories1, sub_categories2, sub_categories3, sub_categories4, sub_categories5, update_descriptions, active
+  - Ações: Pedir ao model para consultar todos os dados de <code>montador</code>
+  - View: N/A
+
+- update: atualiza um funcionário na tabela de <code>montador</code>
+  - Parâmetros de entrada: names, categories, sub_categories1, sub_categories2, sub_categories3, sub_categories4, sub_categories5, update_descriptions, active
+  - Parâmetros de saída:  N/A
+  - Ações: Pedir ao model para alterar um registro da tabela <code>manuals</code>
+  - View: Altera a view de select manual/repository
+
+- delete: exclui um manual da tabela de <code>manuals</code>
+  - Parâmetros de entrada: id
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para deletar um registro da tabela <code>manuals</code>
+  - View: Altera a view de select manual/repository
+
+### Delegation
+
+- getById: possibilita a visualização dos dados de uma delegação
+  - Parâmetros de entrada: id (<code>delegation</code>)
+  - Parâmetros de saída:  doing, done, engineers_id, workers_id, manuals_id
+  - Ações: Pedir ao model para consultar os dados de um funcionário sob o id da tabela <code>delegations</code>
+  - View: N/A
+
+- getAll: possibilita a visualização dos dados de todos os manuais de <code>manuals </code>
+  - Parâmetros de entrada: N/A
+  - Parâmetros de saída: doing, done, engineers_id, workers_id, manuals_id
+  - Ações: Pedir ao model para consultar todos os dados de <code>manuals</code>
+  - View: N/A
+
+- create: delega uma leitura a um montador
+  - Parâmetros de entrada: registrations (<code> engineer </code>), registrations (<code> worker </code>), id (<code> manual </code>)
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para adicionar um registro a tabela <code> delegation </code>
+  - View: altera o interface do montador, adicionando a leitura; altera a dashboard do engenheiro com novas informações
+
+- update: atualiza uma delegation já criada
+  - Parâmetros de entrada: doing, done
+  - Parâmetros de saída: N/A
+  - Ações: Pedir ao model para atualizar um registro da tabela <code> delegations </code> a depender do progresso do montador na sua leitura
+  - View: altera o dashboard dos engenheiros e move o card no kanban do montador
+ 
+- search: pesquisa delegações com base no id do montador e faz um join com manuals_id 
+ - Parâmetros de entrada: workers_id
+ - Parâmetros de saída:  doing, done, engineers_id, workers_id, names, categories, sub_categories1, sub_categories2, sub_categories3, sub_categories4, sub_categories5, update_descriptions, active
+ - Ações: Pedir ao model para consultar todos os registros da tabela <code>delegations</code> sob o id (<code>workers</code>) e fazer um join com a tabela <code>manuals</code> onde manuals_id = id (<code>manuals</code>)
+ - View: aparecem delegações personalizadas no kanban dos funcionários
+
+- getDoing: consulta a quantidade de delegações em que doing = true.
+ - Parâmetros de entrada: N/A
+ - Parâmetros de saída: número
+ - Ações: Pedir ao model para retornar a quantidade de delegações com a linha na coluna doing igual a verdadeiro.
+ - Views: Muda o dashboard do engenheiro
+
+- getDone: consulta a quantidade de delegações em que done = true.
+ - Parâmetros de entrada: N/A
+ - Parâmetros de saída: número
+ - Ações: Pedir ao model para retornar a quantidade de delegações com a linha na coluna done igual a verdadeiro.
+ - Views: Muda o dashboard do engenheiro
+
+- getByManual: consulta as delegações que possuem um manual específico.
+ - Parâmetros de entrada: id (<code>manual</code>)
+ - Parâmetros de saída: id, doing, done, engineers_id, workers_id, names, manuals_id
+ - Ações: Pedir ao model para retornar as delegações que possuem um manual específico
+ - Views: N/A
+
 ## Views (Views):
 
 &nbsp;&nbsp;&nbsp;&nbsp; As views, ou seja, as interfaces as quais os usuários irão interagir são:
 - Login: permitirá o usuário logar na aplicação;
-- engineer_dashboard: permitirá o administrador delegar manuais da lista de leitura de seus funcionários e ver o desempenho deles;
+- engineer_dashboard: permitirá o engenheiro ver o desempenho de seus funcionários;
+- Delegations: permitirá delegar manuais da lista de leitura aos seus funcionários.
 - worker_interface: permitirá o montador ver sua lista de leitura, checar as leituras já feitas e acessar os manuais;
 - repository: permitirá ao engenheiro adicionar, atualizar, ver e deletar manuais e arquivos desses respectivos manuais
-- administrator_interface: permitirá ao administrador ver, adicionar, deletar e ver seus funcionários
 
 ## Infraestrutura:
 
@@ -176,3 +213,4 @@
 &nbsp;&nbsp;&nbsp;&nbsp; A arquitetura Model-View-Controller (MVC) traz implicações importantes para o projeto "DellAware" da LedTech/Dell em termos de escalabilidade, manutenção, testabilidade e colaboração entre equipes de desenvolvimento. Com a separação clara de responsabilidades entre Model, View e Controller, o projeto se torna mais escalável. É possível escalar diferentes partes do sistema independentemente umas das outras, respondendo de forma eficiente a mudanças na demanda ou no volume de dados. De forma semelhante, em relação à manutenção, a divisão em três componentes distintos simplifica as atualizações e correções de bugs. As alterações podem ser feitas em cada componente de forma independente, sem afetar diretamente as outras partes do sistema. Isso torna o processo de desenvolvimento mais ágil e menos propenso a introduzir novos problemas. <br>
 &nbsp;&nbsp;&nbsp;&nbsp; A testabilidade também é beneficiada pela arquitetura MVC. Cada componente pode ser testado de forma isolada, garantindo que eles estejam funcionando corretamente e interagindo entre si da maneira esperada. Isso facilita a detecção e correção de erros durante o processo de desenvolvimento, garantindo a qualidade do software final. Além disso, a adoção do padrão MVC facilita a colaboração entre equipes de desenvolvimento. Com responsabilidades claramente definidas para cada componente, as equipes podem trabalhar de forma mais eficiente e coordenada, focando em suas áreas de especialização e contribuindo para o projeto de maneira mais eficaz. <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Em resumo, a arquitetura MVC proporciona uma estrutura sólida para o desenvolvimento do projeto "DellAware", oferecendo benefícios significativos em termos de escalabilidade, manutenção, testabilidade e colaboração entre equipes de desenvolvimento. Isso contribui para a criação de um software robusto, flexível e de alta qualidade.
+
